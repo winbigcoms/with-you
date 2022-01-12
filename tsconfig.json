@@ -13,8 +13,28 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": true,
+    "paths": {
+      "components/*": ["./src/components/*"],
+      "service/*": ["./src/service/*"],
+      "rootStore": ["./src/store/index.ts"],
+      "store": ["./src/store/*"],
+      "types": ["./src/types/index.ts"],
+      "utill": ["./src/utill/index.ts"],
+      "consts/*": ["./src/consts/*"],
+      "pages/*": ["./pages/*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "connect/mongo.js",
+    "page/_documents.jsx",
+    "src/*",
+    "src/components/KakaoMap"
+  ],
   "exclude": ["node_modules"]
 }

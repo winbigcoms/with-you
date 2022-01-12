@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 좋은 곳은 같이 가고 싶은 법. with-you
 
-## Getting Started
+## 목표
 
-First, run the development server:
+nextJS와 mobx의 이해.
+SEO챙기기
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 스택
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- next.js
+- react-query
+- mobx
+- styled-component
+- mongo-db
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 참고
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+mobx세팅: https://colinch4.github.io/2021-06-07/mobx/
+styled-components 세팅: https://www.yongho-kim.com/post/f2999080-95f8-4b95-adaf-029d9dbf40a4
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 오류/경고
 
-## Learn More
+1. @babel/plugin-proposal-class-properties 옵션중 loose:true적용시 경고 발생
 
-To learn more about Next.js, take a look at the following resources:
+해결: "@babel/plugin-proposal-private-methods", "@babel/plugin-proposal-private-property-in-object", 추가
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. 절대 경로 import
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+babel.rc와 tsconfig둘다 설정해줘야한다.

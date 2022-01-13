@@ -1,14 +1,21 @@
 import React, { forwardRef, Ref } from 'react';
 
+import styled from 'styled-components';
+
 type KakaomapComponentProps = {
   ref: Ref<HTMLDivElement>;
 };
 
+const MapContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
 const KakaoMapContainer: React.FC<KakaomapComponentProps> = forwardRef((props, ref) => {
   return (
-    <div style={{ width: '400px', height: '300px' }}>
+    <MapContainer>
       <div ref={ref} style={{ width: '100%', height: '100%' }} />
-    </div>
+    </MapContainer>
   );
 });
 

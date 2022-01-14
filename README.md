@@ -1,4 +1,4 @@
-# 좋은 곳은 같이 가고 싶은 법. with-you
+# 함께 가보고 싶은, 그런 곳. with-you
 
 ## 목표
 
@@ -12,6 +12,7 @@ SEO챙기기
 - mobx
 - styled-component
 - mongo-db
+- framer-emotion
 
 ## 참고
 

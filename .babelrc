@@ -1,0 +1,55 @@
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      "styled-components",
+      {
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "pages": "./pages",
+          "components": "./src/components",
+          "service": "./src/service",
+          "store": "./src/store",
+          "types": "./src/types",
+          "utill": "./src/utill",
+          "consts": "./src/consts",
+          "Hooks": "./src/Hooks/*",
+          "rootStore": "./src/store/index.ts"
+        },
+        "extensions": [".js", ".jsx", ".tsx"]
+      }
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-private-methods",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-private-property-in-object",
+      {
+        "loose": true
+      }
+    ]
+  ]
+}

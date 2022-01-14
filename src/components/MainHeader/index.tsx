@@ -1,8 +1,10 @@
 import Link from 'next/link';
 
+import React from 'react';
+
 import styled from 'styled-components';
 
-import { CustomSelect, HiddenText, MainSearchBox } from 'components';
+import { HiddenText, MainSearchBox } from 'src/components';
 
 const MainHeaderElement = styled.header`
   position: absolute;
@@ -27,16 +29,25 @@ const MainHeaderElement = styled.header`
   }
 `;
 
-export const MainHeader = () => {
+interface MainHeaderContentProps {
+  searchLocation: (keyword: string) => void;
+}
+
+const MainHeaderContent = (props: MainHeaderContentProps) => {
+  const { searchLocation } = props;
   return (
     <MainHeaderElement>
-      <HiddenText>
-        <h1>width you 공식홈페이지</h1>
-      </HiddenText>
       <Link href='/'>
-        <a>로고 자리</a>
+        <a>
+          <HiddenText>
+            <h1>width you 공식홈페이지</h1>
+          </HiddenText>
+          로고 자리
+        </a>
       </Link>
-      <MainSearchBox></MainSearchBox>
+      <MainSearchBox searchLocation={searchLocation} />
     </MainHeaderElement>
   );
 };
+
+export const MainHeader = React.memo(MainHeaderContent);

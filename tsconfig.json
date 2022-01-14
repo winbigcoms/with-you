@@ -17,13 +17,7 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": true,
     "paths": {
-      "components/*": ["./src/components/*"],
-      "service/*": ["./src/service/*"],
-      "rootStore": ["./src/store/index.ts"],
-      "store": ["./src/store/*"],
-      "types": ["./src/types/index.ts"],
-      "utill": ["./src/utill/index.ts"],
-      "consts/*": ["./src/consts/*"],
+      "src/*": ["./src/*"],
       "pages/*": ["./pages/*"]
     }
   },

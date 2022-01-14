@@ -21,6 +21,7 @@
           "types": "./src/types",
           "utill": "./src/utill",
           "consts": "./src/consts",
+          "Hooks": "./src/Hooks/*",
           "rootStore": "./src/store/index.ts"
         },
         "extensions": [".js", ".jsx", ".tsx"]

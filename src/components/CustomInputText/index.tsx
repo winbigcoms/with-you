@@ -1,6 +1,9 @@
-import { motion } from 'framer-motion';
 import { useState } from 'react';
+
 import styled from 'styled-components';
+
+import { motion } from 'framer-motion';
+
 import { borderBottomAnmaitionVariants } from './animate';
 
 const CustomInputTextElement = styled(motion.input)`
@@ -9,9 +12,16 @@ const CustomInputTextElement = styled(motion.input)`
   border: none;
   border-bottom: 1px solid #c9cfff;
   font-size: 18px;
+  padding-top: 2px;
 `;
 
-export const CustomInputText = () => {
+interface CustomInputTextProps {
+  onSubmit: (keyword: string) => void;
+}
+
+export const CustomInputText = (props: CustomInputTextProps) => {
+  const { onSubmit } = props;
+
   const [isFocused, setFocused] = useState(false);
 
   const onBulrInput = () => {
@@ -22,6 +32,12 @@ export const CustomInputText = () => {
     setFocused(true);
   };
 
+  const onPressEnter = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      onSubmit(e.target.value);
+    }
+  };
+
   return (
     <CustomInputTextElement
       animate={isFocused ? 'focus' : 'blur'}
@@ -30,6 +46,7 @@ export const CustomInputText = () => {
       onFocus={onFocusInput}
       onBlur={onBulrInput}
       placeholder='검색하기~'
+      onKeyPress={onPressEnter}
     />
   );
 };

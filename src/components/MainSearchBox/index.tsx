@@ -1,5 +1,7 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
-import { CustomSelect } from 'components';
+import { CustomSelect, CustomInputText } from 'src/components';
 
 const MainSearchBoxContainer = styled.div`
   max-width: 500px;
@@ -25,11 +27,23 @@ const MainSearchBoxContainer = styled.div`
     padding: 0px 4vw;
   }
 `;
+interface MainSearchBoxProps {
+  searchLocation: (keyword: string) => void;
+}
 
-export const MainSearchBox = () => {
+export const MainSearchBox = (props: MainSearchBoxProps) => {
+  const { searchLocation } = props;
+
+  const [selectedValue, setValue] = useState('new');
+
+  const onChangeSelect = (value: string) => {
+    setValue(value);
+  };
+
   return (
     <MainSearchBoxContainer>
-      <CustomSelect />
+      <CustomSelect selectedValue={selectedValue} onChangeSelect={onChangeSelect} />
+      <CustomInputText onSubmit={searchLocation} />
     </MainSearchBoxContainer>
   );
 };

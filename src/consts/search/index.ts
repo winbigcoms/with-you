@@ -1,11 +1,13 @@
 export const selectAnimationVariants = {
   open: {
     opacity: 1,
-    bottom: '-100px'
+    bottom: '-100px',
+    height: '100px'
   },
   close: {
     opacity: 0,
-    bottom: '-70px'
+    bottom: '0px',
+    height: '50px'
   }
 };
 

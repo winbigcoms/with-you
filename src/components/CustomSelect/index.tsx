@@ -4,10 +4,9 @@ import styled from 'styled-components';
 
 import { motion } from 'framer-motion';
 
-import { searchTypeSelectOptions, selectAnimationVariants } from 'consts/search';
-
 import { Triangle } from 'components';
 import { CustomInputText } from '..';
+import { searchTypeSelectOptions, selectAnimationVariants } from 'src/consts';
 
 const CustomSelectContainer = styled.div`
   max-width: 130px;
@@ -49,9 +48,10 @@ const StyledMotionDiv = styled(motion.div)`
   height: 100px;
   position: absolute;
   left: 0px;
-  bottom: -100px;
+  bottom: 0px;
   z-index: 3;
   left: 0.2vw;
+  overflow: hidden;
 
   @media (max-width: 600px) {
     left: 1vw;
@@ -71,35 +71,33 @@ const CustomSelectOptionShowItem = styled.div<{ idx: number }>`
   background-color: #fff;
 
   border-radius: 20px;
+  cursor: pointer;
 `;
 
 interface CustomSelectProps {
-  initValue?: string;
-  options: { title: string; value: string }[];
+  selectedValue: string;
+  onChangeSelect: (value: string) => void;
 }
 
-export const CustomSelect = () => {
-  const [isOpen, setOpenStae] = useState(false);
-  const [selectedValue, setValue] = useState('new');
+export const CustomSelect = (props: CustomSelectProps) => {
+  const { selectedValue, onChangeSelect } = props;
 
-  const onSelectClick = (e, data) => {
+  const [isOpen, setOpenStae] = useState(false);
+
+  const onSelectClick = e => {
     setOpenStae(state => !state);
   };
 
   const onSelectOptionClick = e => {
     if (e.target.dataset.value && e.target.dataset.value !== selectedValue) {
-      setValue(e.target.dataset.value);
+      onChangeSelect(e.target.dataset.value);
     }
     onSelectClick();
   };
 
-  const onSelectBlur = () => {
-    setOpenStae(false);
-  };
-
   return (
     <>
-      <CustomSelectContainer onClick={onSelectClick} onBlur={onSelectBlur} tabIndex={0}>
+      <CustomSelectContainer onClick={onSelectClick}>
         {searchTypeSelectOptions
           .filter(option => option.value === selectedValue)
           .map((initVal, idx) => (
@@ -107,7 +105,6 @@ export const CustomSelect = () => {
           ))}
         <Triangle size={7} color='#c9cfff' rotate={isOpen} />
       </CustomSelectContainer>
-      <CustomInputText />
       <StyledMotionDiv
         animate={isOpen ? 'open' : 'closed'}
         variants={selectAnimationVariants}

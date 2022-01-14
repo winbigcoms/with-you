@@ -37,3 +37,7 @@ babel.rc와 tsconfig둘다 설정해줘야한다.
 불리언을 넘기니 생기는 경고문
 
 rotate={rotate ? 1 : 0} 해결
+
+5. 애니메이션
+
+motion 라이브러리를 이용

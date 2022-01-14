@@ -1,15 +1,19 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
+import { useState } from 'react';
+
+import styled from 'styled-components';
+
 import { toJS } from 'mobx';
 import { inject } from 'mobx-react';
 import { observer } from 'mobx-react-lite';
 
 import { UserStore } from 'store';
 
-import { Map, MainHeader } from 'components';
-
-import styled from 'styled-components';
+import { MainHeader, Map } from 'src/components';
+import { KakaoPlace, PlaceType } from 'src/types/place';
+import { useKakaoMap } from 'src/Hooks';
 
 const StyledDiv = styled.div`
   color: red;
@@ -21,9 +25,17 @@ interface HomeProps {
 
 const Home: NextPage = (props: HomeProps) => {
   const { user } = props;
+  const [places, setPlaces] = useState<KakaoPlace[] | PlaceType[]>([]);
+  const [selectedKakaoPlace, , setSelectedKakaoplace] = useState<KakaoPlace>({});
 
-  // const { userData } = user;
-  // console.log(toJS(userData));
+  const saveKakaoSearchResult = (result: KakaoPlace[]) => {
+    setPlaces(result);
+  };
+
+  const { kakaoMap, selectInList, searchLocation, paginationObject } = useKakaoMap({
+    setSearchData: saveKakaoSearchResult,
+    searchData: places
+  });
 
   return (
     <main>
@@ -31,8 +43,8 @@ const Home: NextPage = (props: HomeProps) => {
         <meta name='keyword' content='카페 찾기' />
         <title>with you</title>
       </Head>
-      <MainHeader />
-      <Map />
+      <MainHeader searchLocation={searchLocation} />
+      <Map kakaoMapObject={kakaoMap} />
     </main>
   );
 };

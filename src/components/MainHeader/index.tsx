@@ -11,9 +11,11 @@ const MainHeaderElement = styled.header`
   z-index: 20;
   width: 100%;
 
+  background-color: rgba(201, 207, 255, 0.3);
+
   max-height: 80px;
   min-height: 50px;
-  height: 10%;
+  height: 7%;
 
   display: flex;
   align-items: center;

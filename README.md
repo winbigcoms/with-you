@@ -27,3 +27,13 @@ styled-components 세팅: https://www.yongho-kim.com/post/f2999080-95f8-4b95-ada
 2. 절대 경로 import
 
 babel.rc와 tsconfig둘다 설정해줘야한다.
+
+3. Text content did not match
+
+미해결
+
+4. next-dev.js?3515:32 Warning: Received `false` for a non-boolean attribute `rotate`.
+
+불리언을 넘기니 생기는 경고문
+
+rotate={rotate ? 1 : 0} 해결

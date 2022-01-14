@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+
+import styled from 'styled-components';
+
+import { motion } from 'framer-motion';
+
+import { searchTypeSelectOptions, selectAnimationVariants } from 'consts/search';
+
+import { Triangle } from 'components';
+import { CustomInputText } from '..';
 
 const CustomSelectContainer = styled.div`
   max-width: 130px;
-  min-width: 120px;
-  width: 20%;
+  width: 35%;
 
   max-height: 55px;
   min-height: 50px;
@@ -13,51 +20,54 @@ const CustomSelectContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 
   cursor: pointer;
+  z-index: 5;
+  background-color: #fff;
+  border-radius: 20px;
+
+  @media (max-width: 600px) {
+    width: 82px;
+  }
 `;
 
 const CustomSelctShowCase = styled.div`
-  max-width: 95px;
-  min-width: 50px;
-  width: 100%;
-  margin-right: 5px;
+  width: 60px;
+  text-align: center;
+  margin-right: 7px;
+
+  @media (max-width: 600px) {
+    margin-right: 5px;
+    text-align: start;
+  }
 `;
 
-const CustomSelectTriangle = styled.div<{ isOpen: boolean }>`
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 12px solid #c9cfff;
-
-  transform: rotate(${props => (props.isOpen ? 180 : 0)}deg);
-  transition: transform 0.3s;
-`;
-
-const CustomSelectOptionShowBox = styled.div<{ isOpen: boolean }>`
-  width: 100%;
+const StyledMotionDiv = styled(motion.div)`
+  width: 24%;
+  min-width: 100px;
   height: 100px;
-
   position: absolute;
   left: 0px;
   bottom: -100px;
+  z-index: 3;
+  left: 0.2vw;
 
-  display: ${props => (props.isOpen ? 'block' : 'none')};
+  @media (max-width: 600px) {
+    left: 1vw;
+  }
 `;
 
 const CustomSelectOptionShowItem = styled.div<{ idx: number }>`
   width: 90%;
   height: 40px;
-  border-radius: 17px;
-  position: absolute;
 
-  left: -5px;
-  top: calc(10px + ${props => props.idx * 50}px);
+  margin: 7px 0px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
   background-color: #fff;
 
   border-radius: 20px;
@@ -73,40 +83,43 @@ export const CustomSelect = () => {
   const [selectedValue, setValue] = useState('new');
 
   const onSelectClick = (e, data) => {
-    console.log(e, data);
     setOpenStae(state => !state);
   };
 
   const onSelectOptionClick = e => {
-    e.stoppropagation();
+    if (e.target.dataset.value && e.target.dataset.value !== selectedValue) {
+      setValue(e.target.dataset.value);
+    }
+    onSelectClick();
   };
 
-  const selectOptions = [
-    {
-      title: '신규 카페 검색',
-      value: 'new'
-    },
-    {
-      title: '내 장소 검색',
-      value: 'old'
-    }
-  ];
+  const onSelectBlur = () => {
+    setOpenStae(false);
+  };
 
   return (
-    <CustomSelectContainer onClick={onSelectClick}>
-      {selectOptions
-        .filter(option => option.value === selectedValue)
-        .map((initVal, idx) => {
-          return <CustomSelctShowCase key={idx}>{initVal.title}</CustomSelctShowCase>;
-        })}
-      <CustomSelectTriangle isOpen={isOpen} />
-      <CustomSelectOptionShowBox isOpen={isOpen}>
-        {selectOptions.map((option, idx) => (
-          <CustomSelectOptionShowItem key={idx} idx={idx} defaultValue={option.value}>
+    <>
+      <CustomSelectContainer onClick={onSelectClick} onBlur={onSelectBlur} tabIndex={0}>
+        {searchTypeSelectOptions
+          .filter(option => option.value === selectedValue)
+          .map((initVal, idx) => (
+            <CustomSelctShowCase key={idx}>{initVal.title}</CustomSelctShowCase>
+          ))}
+        <Triangle size={7} color='#c9cfff' rotate={isOpen} />
+      </CustomSelectContainer>
+      <CustomInputText />
+      <StyledMotionDiv
+        animate={isOpen ? 'open' : 'closed'}
+        variants={selectAnimationVariants}
+        initial='close'
+        onClick={onSelectOptionClick}
+      >
+        {searchTypeSelectOptions.map((option, idx) => (
+          <CustomSelectOptionShowItem key={idx} idx={idx} data-value={option.value}>
             {option.title}
           </CustomSelectOptionShowItem>
         ))}
-      </CustomSelectOptionShowBox>
-    </CustomSelectContainer>
+      </StyledMotionDiv>
+    </>
   );
 };

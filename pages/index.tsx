@@ -22,8 +22,8 @@ interface HomeProps {
 const Home: NextPage = (props: HomeProps) => {
   const { user } = props;
 
-  const { userData } = user;
-  console.log(toJS(userData));
+  // const { userData } = user;
+  // console.log(toJS(userData));
 
   return (
     <main>

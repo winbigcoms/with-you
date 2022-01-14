@@ -3,6 +3,8 @@ import { CustomSelect } from 'components';
 
 const MainSearchBoxContainer = styled.div`
   max-width: 500px;
+  min-width: 250px;
+
   max-height: 70px;
   min-height: 45px;
 
@@ -16,7 +18,12 @@ const MainSearchBoxContainer = styled.div`
   transform: translateX(-50%);
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0px 1vw;
+
+  @media (max-width: 600px) {
+    padding: 0px 4vw;
+  }
 `;
 
 export const MainSearchBox = () => {

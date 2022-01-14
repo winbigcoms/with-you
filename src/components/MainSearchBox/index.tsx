@@ -27,6 +27,7 @@ const MainSearchBoxContainer = styled.div`
     padding: 0px 4vw;
   }
 `;
+
 interface MainSearchBoxProps {
   searchLocation: (keyword: string) => void;
 }
